@@ -102,7 +102,8 @@ public class Player extends Character {
 
     @Override
     public String toString() {
-        String output = super.toString();
+        String output = "== P L A Y E R   I N F O ==";
+        output += super.toString();
 
         if (weapon != null) {
             output += "\nWeapon Damage: " + weapon.getDamage();

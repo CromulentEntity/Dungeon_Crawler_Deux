@@ -15,4 +15,23 @@ public class ConsoleHelper {
         playerInput.nextLine();
         clear();
     }
+
+    public static void displayInfoScreen(String[] info) {
+        clear();
+        for (int i = 0; i < info.length; i++) {
+            System.out.println(info[i]);
+        }
+        enterToContinue();
+    }
+
+    public static void printChoices(String[] list) {
+        for (int i = 0; i < list.length; i++) {
+            System.out.println((i+1) + ". " + list[i]);
+        }
+    }
+
+    public static void invalidInputMessage() {
+        clear();
+        System.out.println("That is not a valid input! Hiss!\n");
+    }
 }

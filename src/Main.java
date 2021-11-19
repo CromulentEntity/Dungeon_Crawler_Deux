@@ -14,12 +14,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ConsoleHelper.clear();
         Player player = initializePlayer();
-        ConsoleHelper.clear();
         Map map = initializeMap();
-        ConsoleHelper.clear();
         boolean exit = false;
+
+        ConsoleHelper.clear();
 
         while(!exit) {
             exit = actionSelect(map, player);
@@ -31,6 +30,8 @@ public class Main {
         Scanner playerInput = new Scanner(System.in);
         String playerName;
 
+        ConsoleHelper.clear();
+
         System.out.print("Please enter your name: ");
         playerName = playerInput.nextLine();
 
@@ -41,6 +42,8 @@ public class Main {
         Scanner playerInput = new Scanner(System.in);
         int mapXLength;
         int mapYLength;
+
+        ConsoleHelper.clear();
 
         System.out.print("Please enter your desired map width: ");
         mapXLength = playerInput.nextInt();
@@ -55,57 +58,47 @@ public class Main {
     public static boolean actionSelect(Map map, Player player) {
         Scanner playerInput = new Scanner(System.in);
         String rawInput;
-
-        System.out.print(
-            "1. View Bag Contents\n" +
-            "2. Move\n" +
-            "3. Display Player Information\n" +
-            "4. Display Map\n" +
-            "5. Equip Weapon\n" +
-            "6. Unequip Weapon\n" + 
-            "7. Exit\n" +
-            "\nPlease choose an option: ");
+        String[] choiceList = {"View Bag Contents", "Move", "Display Player Information", "Display Map", "Equip Weapon", "Unequip Weapon", "Exit"};
+        ConsoleHelper.printChoices(choiceList);
 
         rawInput = playerInput.nextLine();
 
         switch (rawInput) {
             case "1":
-                ConsoleHelper.clear();
-                System.out.print(player.getBag().toString());
-                ConsoleHelper.enterToContinue();
+                ConsoleHelper.displayInfoScreen( new String[]{player.getBag().toString()} );
                 return false;
+
             case "2":
                 ConsoleHelper.clear();
                 movePlayer(player, map);
                 return false;
+
             case "3":
-                ConsoleHelper.clear();
-                System.out.print("== P L A Y E R   I N F O ==");
-                System.out.println(player.toString());
-                ConsoleHelper.enterToContinue();
+                ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
                 return false;
+
             case "4":
-                ConsoleHelper.clear();
-                System.out.print("== M A P ==");
-                System.out.println(map.toString());
-                System.out.println("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1] + "\n");
-                ConsoleHelper.enterToContinue();
+                ConsoleHelper.displayInfoScreen( new String[] {map.toString(), 
+                    ("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1] + "\n")});
                 return false;
+
             case "5":
                 ConsoleHelper.clear();
                 player.equipWeapon();
                 return false;
+
             case "6":
                 ConsoleHelper.clear();
                 player.removeWeapon();
                 return false;
+
             case "7":
                 ConsoleHelper.clear();
                 System.out.println("Exiting the program, Nya!");
                 return true;
+
             default:
-                ConsoleHelper.clear();
-                System.out.println("That is not a valid input! Hiss!\n");
+                ConsoleHelper.invalidInputMessage();
                 return false;
         }
     }
@@ -118,13 +111,10 @@ public class Main {
         String direction;
         
         ConsoleHelper.clear();
-        System.out.print("== M A P ==");
         System.out.print(map.toString());
         System.out.println("\nWhat direction would you like to move?");
-        System.out.println("1. North" +
-                           "\n2. South" +
-                           "\n3. East" +
-                           "\n4. West");
+        String[] choiceList = {"North", "South", "East", "West"};
+        ConsoleHelper.printChoices(choiceList);
         
         direction = playerInput.nextLine();
         ConsoleHelper.clear();

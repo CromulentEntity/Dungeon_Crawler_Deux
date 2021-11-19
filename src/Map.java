@@ -29,7 +29,7 @@ public class Map {
 
     @Override
     public String toString() {
-        String output = "\n";
+        String output = "== M A P ==\n";
         for(int y = 0; y < map.length; y++) {
             for(int x = 0; x < map[0].length; x++) {
                 output += map[y][x].getActiveIcon() + " ";
