@@ -6,18 +6,17 @@ public class Player extends Character {
     private static final int STARTINGHEALTH = 100;
     private static final int STARTINGMANA = 100;
     private static final int BASEDAMAGE = 5;
+    private static final int[] STARTINGLOCATION = {0, 0};
     private Weapon weapon;
     private int experience;
     private int level;
-    private int[] location; // Current X,Y coordinates on the map. Default is 0,0.
     private Bag bag;
 
     // Constructor
     public Player(String name) {
-        super(name, STARTINGHEALTH, STARTINGMANA, BASEDAMAGE);
+        super(name, STARTINGHEALTH, STARTINGMANA, BASEDAMAGE, STARTINGLOCATION);
         this.experience = 0;
         this.level = 1;
-        this.location = new int[] {0, 0};
         this.bag = new Bag();
         this.weapon = new Weapon("Bronze Dagger", "We all gotta start somewhere.", 0, 10, "Hand");
         bag.addWeaponToBag(new Weapon("Sord..", "Unspeakably shitty sword.", 0, 6, "Hand"));
@@ -58,9 +57,7 @@ public class Player extends Character {
                 System.out.print("\nEnter the number corresponding to your desired choice: ");
                 int chosenWeapon = playerInput.nextInt();
                 
-                // Clear the console
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                ConsoleHelper.clear();
                 
                 System.out.println("You equip the " + bag.getWeapons().get(chosenWeapon-1).getName() + ".\n");
                 weapon = bag.removeWeaponFromBag(chosenWeapon - 1);
@@ -73,7 +70,7 @@ public class Player extends Character {
             Weapon removedWeapon = weapon;
             weapon = null;
             bag.addWeaponToBag(removedWeapon);
-            System.out.println("You add your weapon to your bag.\n");
+            System.out.println("You store your weapon in your bag.\n");
 
         } else {
             System.out.println("You are not currently holding a weapon!\n");
@@ -87,17 +84,8 @@ public class Player extends Character {
     public int getLevel() {
         return level;
     }
-    public int[] getLocation() {
-        return location;
-    }
     public Bag getBag() {
         return bag;
-    }
-
-    // Sets
-    public void setLocation(int xDirection, int yDirection) {
-        this.location[0] = xDirection;
-        this.location[1] = yDirection;
     }
 
     @Override
@@ -110,8 +98,7 @@ public class Player extends Character {
         }
 
         output += "\nExperience: " + this.experience + 
-                    "\nLevel: " + this.level +
-                    "\nCoordinates - X: " + location[0] + " Y: " + location[1];
+                    "\nLevel: " + this.level;
 
         return output;
     }

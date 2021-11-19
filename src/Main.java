@@ -56,6 +56,7 @@ public class Main {
     }
 
     public static boolean actionSelect(Map map, Player player) {
+        MovementComponent playerMovement = new MovementComponent(player, map);
         Scanner playerInput = new Scanner(System.in);
         String rawInput;
         String[] choiceList = {"View Bag Contents", "Move", "Display Player Information", "Display Map", "Equip Weapon", "Unequip Weapon", "Exit"};
@@ -70,7 +71,7 @@ public class Main {
 
             case "2":
                 ConsoleHelper.clear();
-                movePlayer(player, map);
+                playerMovement.moveCharacter();
                 return false;
 
             case "3":
@@ -100,96 +101,6 @@ public class Main {
             default:
                 ConsoleHelper.invalidInputMessage();
                 return false;
-        }
-    }
-
-    // This is bad rn (update: improving)
-    public static void movePlayer(Player player, Map map) {
-        int playerXLocation = player.getLocation()[0];
-        int playerYLocation = player.getLocation()[1];
-        Scanner playerInput = new Scanner(System.in);
-        String direction;
-        
-        ConsoleHelper.clear();
-        System.out.print(map.toString());
-        System.out.println("\nWhat direction would you like to move?");
-        String[] choiceList = {"North", "South", "East", "West"};
-        ConsoleHelper.printChoices(choiceList);
-        
-        direction = playerInput.nextLine();
-        ConsoleHelper.clear();
-        
-        final String OUTOFBOUNDSMESSAGE = "That location lies outside of the map.\n";
-
-        switch(direction) {
-            case "1":
-
-                if (playerYLocation - 1 >= 0) {
-                    Tile currentTile = map.getMap()[playerYLocation][playerXLocation];
-                    Tile newTile = map.getMap()[playerYLocation - 1][playerXLocation];
-                    
-                    if (newTile.tileCanBeEntered()) {
-                        System.out.println("You move to the North.\n");
-                        player.setLocation(playerXLocation, playerYLocation - 1);
-                        currentTile.isPlayerPresent(false);
-                        newTile.isPlayerPresent(true);
-                    }
-
-                } else { System.out.println(OUTOFBOUNDSMESSAGE); }
-                break;
-
-            case "2":
-
-                if (playerYLocation + 1 < map.getMap().length) {
-                    Tile currentTile = map.getMap()[playerYLocation][playerXLocation];
-                    Tile newTile = map.getMap()[playerYLocation + 1][playerXLocation];
-
-                    if (newTile.tileCanBeEntered()) {
-                        System.out.println("You move to the South.\n");
-                        player.setLocation(playerXLocation, playerYLocation + 1);
-                        currentTile.isPlayerPresent(false);
-                        newTile.isPlayerPresent(true);
-                    }
-
-                } else { System.out.println(OUTOFBOUNDSMESSAGE); }
-                break;
-
-            case "3":
-
-                if (playerXLocation + 1 < map.getMap()[0].length) {
-                    Tile currentTile = map.getMap()[playerYLocation][playerXLocation];
-                    Tile newTile = map.getMap()[playerYLocation][playerXLocation + 1];
-
-                    if (newTile.tileCanBeEntered()) {
-                        System.out.println("You move to the East.\n");
-                        player.setLocation(playerXLocation + 1, playerYLocation);
-                        currentTile.isPlayerPresent(false);
-                        newTile.isPlayerPresent(true);
-                    }
-
-                } else { System.out.println(OUTOFBOUNDSMESSAGE); }
-                break;
-
-            case "4":
-
-                if (playerXLocation - 1 >= 0) {
-                    Tile currentTile = map.getMap()[playerYLocation][playerXLocation];
-                    Tile newTile = map.getMap()[playerYLocation][playerXLocation - 1];
-
-                    if (newTile.tileCanBeEntered()) {
-                        System.out.println("You move to the West.\n");
-                        player.setLocation(playerXLocation - 1, playerYLocation);
-                        currentTile.isPlayerPresent(false);
-                        newTile.isPlayerPresent(true);
-                    }
-
-                } else { System.out.println(OUTOFBOUNDSMESSAGE); }
-                break;
-
-            default:
-                System.out.println("That is not a valid input! Hiss!\n"); 
-                movePlayer(player, map);
-                break;
         }
     }
 }

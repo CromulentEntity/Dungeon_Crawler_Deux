@@ -6,15 +6,17 @@ public class Character {
     private int mana;
     private int maxMana;
     private int baseDamage;
+    private int[] location; // Current X,Y coordinates on the map. Default is 0,0.
 
     // Constructor
-    public Character(String name, int maxHealth, int maxMana, int baseDamage) {
+    public Character(String name, int maxHealth, int maxMana, int baseDamage, int[] location) {
         this.name = name;
         this.health = maxHealth;
         this.maxHealth = maxHealth;
         this.mana = maxMana;
         this.maxMana = maxMana;
         this.baseDamage = baseDamage;
+        this.location = location;
     }
 
     // Everything else
@@ -44,6 +46,9 @@ public class Character {
     public int getMana() {
         return mana;
     }
+    public int[] getLocation() {
+        return location;
+    }
 
     // Sets
     public void setHealth(int health) {
@@ -52,13 +57,18 @@ public class Character {
     public void setMana(int mana) {
         this.mana = mana;
     }
+    public void setLocation(int xDirection, int yDirection) {
+        this.location[0] = xDirection;
+        this.location[1] = yDirection;
+    }
 
     @Override
     public String toString() {
         String output = "\nName: " + name +
             "\nHealth: " + health + "/" + maxHealth +
             "\nMana: " + mana + "/" + maxMana +
-            "\nDamage: " + baseDamage;
+            "\nDamage: " + baseDamage +
+            "\nCoordinates - X: " + location[0] + " Y: " + location[1];
 
         return output;
     }
