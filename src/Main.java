@@ -14,11 +14,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        clearConsole();
+        ConsoleHelper.clear();
         Player player = initializePlayer();
-        clearConsole();
+        ConsoleHelper.clear();
         Map map = initializeMap();
-        clearConsole();
+        ConsoleHelper.clear();
         boolean exit = false;
 
         while(!exit) {
@@ -70,47 +70,41 @@ public class Main {
 
         switch (rawInput) {
             case "1":
-                clearConsole();
+                ConsoleHelper.clear();
                 System.out.print(player.getBag().toString());
-                System.out.println("\nPress enter to continue.");
-                playerInput.nextLine();
-                clearConsole();
+                ConsoleHelper.enterToContinue();
                 return false;
             case "2":
-                clearConsole();
+                ConsoleHelper.clear();
                 movePlayer(player, map);
                 return false;
             case "3":
-                clearConsole();
+                ConsoleHelper.clear();
                 System.out.print("== P L A Y E R   I N F O ==");
                 System.out.println(player.toString());
-                System.out.println("\nPress enter to continue.");
-                playerInput.nextLine();
-                clearConsole();
+                ConsoleHelper.enterToContinue();
                 return false;
             case "4":
-                clearConsole();
+                ConsoleHelper.clear();
                 System.out.print("== M A P ==");
                 System.out.println(map.toString());
                 System.out.println("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1] + "\n");
-                System.out.println("Press enter to continue.");
-                playerInput.nextLine();
-                clearConsole();
+                ConsoleHelper.enterToContinue();
                 return false;
             case "5":
-                clearConsole();
+                ConsoleHelper.clear();
                 player.equipWeapon();
                 return false;
             case "6":
-                clearConsole();
+                ConsoleHelper.clear();
                 player.removeWeapon();
                 return false;
             case "7":
-                clearConsole();
+                ConsoleHelper.clear();
                 System.out.println("Exiting the program, Nya!");
                 return true;
             default:
-                clearConsole();
+                ConsoleHelper.clear();
                 System.out.println("That is not a valid input! Hiss!\n");
                 return false;
         }
@@ -123,7 +117,7 @@ public class Main {
         Scanner playerInput = new Scanner(System.in);
         String direction;
         
-        clearConsole();
+        ConsoleHelper.clear();
         System.out.print("== M A P ==");
         System.out.print(map.toString());
         System.out.println("\nWhat direction would you like to move?");
@@ -133,7 +127,7 @@ public class Main {
                            "\n4. West");
         
         direction = playerInput.nextLine();
-        clearConsole();
+        ConsoleHelper.clear();
         
         final String OUTOFBOUNDSMESSAGE = "That location lies outside of the map.\n";
 
@@ -207,10 +201,5 @@ public class Main {
                 movePlayer(player, map);
                 break;
         }
-    }
-
-    public static void clearConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 }

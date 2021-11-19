@@ -52,6 +52,7 @@ public class BattleComponent {
                 enemies[i].attack(player);
             }
         }
+        return true;
     }
 
     private void advanceTurn() {
