@@ -20,27 +20,21 @@ public class BattleComponent {
         if (turn == 0) {
             // Player does things
             System.out.println("It is your turn.\n");
-            System.out.print("1. Attack\n" +
-                             "Please choose an option: ");
+            String[] choiceList = {"Attack"};
+            ConsoleHelper.printChoices(choiceList);
             
             String rawInput = playerInput.nextLine();
 
             switch (rawInput) {
                 case "1":
-                    // Clear console
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-
+                    ConsoleHelper.clear();
                     Character target = chooseTarget();
-
                     player.attack(target);
                     advanceTurn();
                     break;
                 
                 default:
-                    System.out.print("\033[H\033[2J");
-                    System.out.flush();
-                    
+                    ConsoleHelper.clear();
                     System.out.println("That is not a valid input! Hiss!\n");
                     break;
 
@@ -48,10 +42,10 @@ public class BattleComponent {
             }
         } else {
             // Enemies do things
-            for (int i = 0; i < enemies.length; i++) {
-                enemies[i].attack(player);
-            }
+            enemies[turn-1].attack(player);
         }
+
+        // Temporary return statement for compiling purposes
         return true;
     }
 

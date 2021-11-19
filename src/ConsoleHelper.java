@@ -11,7 +11,7 @@ public class ConsoleHelper {
     }
 
     public static void enterToContinue() {
-        System.out.println("\nPress enter to continue.");
+        System.out.println("Press enter to continue.");
         playerInput.nextLine();
         clear();
     }
@@ -28,6 +28,8 @@ public class ConsoleHelper {
         for (int i = 0; i < list.length; i++) {
             System.out.println((i+1) + ". " + list[i]);
         }
+
+        System.out.print("\nPlease choose an option: ");
     }
 
     public static void invalidInputMessage() {
