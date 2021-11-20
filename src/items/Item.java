@@ -1,4 +1,4 @@
-package src;
+package src.items;
 public class Item {
     private String name;
     private String description;

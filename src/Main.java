@@ -10,6 +10,9 @@
 package src;
 import java.util.Scanner;
 
+import src.characters.Player;
+import src.components.MainMenuComponent;
+
 public class Main {
     public static void main(String[] args) {
         Player player = initializePlayer();

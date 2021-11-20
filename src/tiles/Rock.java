@@ -1,6 +1,6 @@
 // A rock tile on the map. Blocks movement.
 
-package src;
+package src.tiles;
 
 public class Rock extends Tile {
     

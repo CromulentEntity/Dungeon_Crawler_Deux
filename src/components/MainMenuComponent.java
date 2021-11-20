@@ -1,6 +1,15 @@
-package src;
+/* TODO:
+ * Try and seperate out more of the switch statement into other methods, particularly the ConsoleHelper
+ *
+*/
+
+package src.components;
 
 import java.util.Scanner;
+
+import src.ConsoleHelper;
+import src.Map;
+import src.characters.Player;
 
 public class MainMenuComponent {
     private Map map;

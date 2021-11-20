@@ -1,6 +1,6 @@
 // Seeing if the tile class would be better off generic
 
-package src;
+package src.tiles;
 
 public class GenericTile<T> {
     private T type;

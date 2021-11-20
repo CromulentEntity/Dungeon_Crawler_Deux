@@ -6,6 +6,8 @@
 package src;
 import java.util.ArrayList;
 
+import src.items.Weapon;
+
 public class Bag {
     private ArrayList<Weapon> weapons;
 

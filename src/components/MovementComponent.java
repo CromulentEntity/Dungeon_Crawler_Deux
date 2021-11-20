@@ -1,6 +1,15 @@
-package src;
+/* TODO:
+ * An instance of this should be contained within each character that moves, not the other way around as it currently is.
+*/ 
+
+package src.components;
 
 import java.util.Scanner;
+
+import src.ConsoleHelper;
+import src.Map;
+import src.characters.Character;
+import src.tiles.Tile;
 
 public class MovementComponent {
     Character character;

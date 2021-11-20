@@ -1,6 +1,9 @@
-package src;
+package src.components;
 
 import java.util.Scanner;
+
+import src.ConsoleHelper;
+import src.characters.Character;
 
 public class BattleComponent {
     Character player;

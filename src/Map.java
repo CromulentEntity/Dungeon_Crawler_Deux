@@ -1,5 +1,9 @@
 package src;
 
+import src.tiles.Rock;
+import src.tiles.Room;
+import src.tiles.Tile;
+
 public class Map {
     private Tile[][] map;
     private int xDimensions;

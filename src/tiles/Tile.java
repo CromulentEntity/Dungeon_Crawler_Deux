@@ -1,4 +1,4 @@
-package src;
+package src.tiles;
 
 public class Tile {
     private String icon;

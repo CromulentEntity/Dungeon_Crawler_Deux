@@ -1,6 +1,6 @@
 // A room tile on the map. Allows movement if unlocked.
 
-package src;
+package src.tiles;
 
 public class Room extends Tile {
 

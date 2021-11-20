@@ -1,4 +1,4 @@
-package src;
+package src.characters;
 
 public class Goblin extends Character {
     static final String NAME = "Goblin";

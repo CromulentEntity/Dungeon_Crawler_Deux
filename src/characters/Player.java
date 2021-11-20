@@ -1,6 +1,10 @@
-package src;
+package src.characters;
 
 import java.util.Scanner;
+
+import src.Bag;
+import src.ConsoleHelper;
+import src.items.Weapon;
 
 public class Player extends Character {
     private static final int STARTINGHEALTH = 100;
