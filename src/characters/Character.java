@@ -11,10 +11,10 @@ public class Character {
     private int maxMana;
     private int baseDamage;
     private int[] location; // Current X,Y coordinates on the map. Default is 0,0.
-    private MovementComponent movement;
+    private MovementComponent movementComponent;
 
     // Constructor
-    public Character(String name, int maxHealth, int maxMana, int baseDamage, int[] location, Map map) {
+    public Character(String name, int maxHealth, int maxMana, int baseDamage, int[] location) {
         this.name = name;
         this.health = maxHealth;
         this.maxHealth = maxHealth;
@@ -22,12 +22,12 @@ public class Character {
         this.maxMana = maxMana;
         this.baseDamage = baseDamage;
         this.location = location;
-        this.movement = new MovementComponent(map);
+        this.movementComponent = new MovementComponent();
     }
 
     // Everything else
-    public void move() {
-        location = movement.moveCharacter(location[0], location[1]);
+    public void move(Map map) {
+        location = movementComponent.moveCharacter(location[0], location[1], map);
     }
 
     public void loseHealth(int damage) {

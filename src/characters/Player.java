@@ -18,8 +18,8 @@ public class Player extends Character {
     private Bag bag;
 
     // Constructor
-    public Player(String name, Map map) {
-        super(name, STARTINGHEALTH, STARTINGMANA, BASEDAMAGE, STARTINGLOCATION, map);
+    public Player(String name) {
+        super(name, STARTINGHEALTH, STARTINGMANA, BASEDAMAGE, STARTINGLOCATION);
         this.experience = 0;
         this.level = 1;
         this.bag = new Bag();

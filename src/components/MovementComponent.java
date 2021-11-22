@@ -15,13 +15,10 @@ import src.Map;
 import src.tiles.Tile;
 
 public class MovementComponent {
-    Map map;
 
-    public MovementComponent(Map map) {
-        this.map = map;
-    }
+    public MovementComponent() {}
 
-    public int[] moveCharacter(int currentXCoordinate, int currentYCoordinate) {
+    public int[] moveCharacter(int currentXCoordinate, int currentYCoordinate, Map map) {
         Scanner playerInput = new Scanner(System.in);
         int newXCoordinate;
         int newYCoordinate;
@@ -42,30 +39,30 @@ public class MovementComponent {
             case "1":
                 newXCoordinate = currentXCoordinate;
                 newYCoordinate = currentYCoordinate - 1;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "North");
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "North");
 
             case "2":
                 newXCoordinate = currentXCoordinate;
                 newYCoordinate = currentYCoordinate + 1;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "South");
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "South");
 
             case "3":
                 newXCoordinate = currentXCoordinate + 1;
                 newYCoordinate = currentYCoordinate;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "East");
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "East");
                 
             case "4":
                 newXCoordinate = currentXCoordinate - 1;
                 newYCoordinate = currentXCoordinate;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "West");
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "West");
 
             default:
                 System.out.println("That is not a valid input! Hiss!\n"); 
-                return moveCharacter(currentXCoordinate, currentYCoordinate);
+                return moveCharacter(currentXCoordinate, currentYCoordinate, map);
         }
     }
 
-    public int[] checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, String direction) {
+    public int[] checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, Map map, String direction) {
 
         if (newXCoordinate >= 0 && newXCoordinate < map.getMap()[0].length) {
         

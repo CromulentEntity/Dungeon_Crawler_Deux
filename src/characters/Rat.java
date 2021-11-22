@@ -10,6 +10,6 @@ public class Rat extends Character{
     static final int[] STARTINGLOCATION = {2, 2};
 
     public Rat(Map map) {
-        super(NAME, HEALTH, MANA, BASEDAMAGE, STARTINGLOCATION, map);
+        super(NAME, HEALTH, MANA, BASEDAMAGE, STARTINGLOCATION);
     }
 }

@@ -39,7 +39,7 @@ public class MainMenuComponent {
 
             case "2":
                 ConsoleHelper.clear();
-                player.move();
+                player.move(map);
                 return false;
 
             case "3":
