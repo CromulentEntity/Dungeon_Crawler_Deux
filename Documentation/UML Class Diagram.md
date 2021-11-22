@@ -65,11 +65,8 @@ class Rat {
 
 
 class MovementComponent {
-    - character : Character
-    - map : Map
-    --
     .. General ..
-    moveCharacter()
+    moveCharacter(currentXCoordinate : int, currentYCoordinate : int, map : Map)
     checkCollisions(int, int, int, int, String)
 }
 
@@ -187,15 +184,13 @@ Tile <|-- Room : < is a
 Character <|-- Player : < is a
 Character <|-- Rat : < is a
 Character <|-- Goblin : < is a
+Character "1" *-- "1" MovementComponent : < part of
 
 Item <|-- Weapon : < is an
 
 Map "1" *-- "Many" Tile : made of >
 
 Bag "1" o-- "Many" Weapon : contains >
-
-MovementComponent "1" *-- "1" Character : Relies on >
-MovementComponent "1" *-- "1" Map : Relies on >
 
 MainMenuComponent "1" *-- "1" Player : Relies on >
 MainMenuComponent "1" *-- "1" Map : Relies on >

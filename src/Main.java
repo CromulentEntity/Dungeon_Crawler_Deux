@@ -1,9 +1,9 @@
 /* TODO:
  * Use better data structures for some things (e.g. Linked List in backpack)
- * Figure out why the Scanners break when closed properly
  * Learn what a string builder is
  * Make a battle dialogue
  * Write tests (e.g. Unequip starting weapon, Equip spare weapon, make sure spare weapon is equip and starting weapon is in bag)
+ * Maybe remove instance variables from certain objects (like MainMenuComponent) and include them as method inputs instead
  * 
 */
 
