@@ -17,6 +17,7 @@ public class BattleComponent {
         this.turn = 0;
     }
 
+    // General Methods
     public boolean battle() {
         Scanner playerInput = new Scanner(System.in);
         

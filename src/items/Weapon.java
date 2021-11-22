@@ -20,6 +20,7 @@ public class Weapon extends Item {
         return slot;
     }
 
+    // toString
     @Override
     public String toString() {
         return getName() + ": Damage - " + damage + ", Value - " + getValue() + ", Slot - " + slot;

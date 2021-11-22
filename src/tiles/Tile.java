@@ -16,7 +16,7 @@ public class Tile {
         this.isPassable = updateIsPassable();
     }
 
-    // Everything else
+    // General Methods
     private boolean updateIsPassable() {
         return (!isSolid && !isLocked);
     }

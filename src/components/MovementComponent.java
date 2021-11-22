@@ -16,8 +16,7 @@ import src.tiles.Tile;
 
 public class MovementComponent {
 
-    public MovementComponent() {}
-
+    // General Methods
     public int[] moveCharacter(int currentXCoordinate, int currentYCoordinate, Map map) {
         Scanner playerInput = new Scanner(System.in);
         int newXCoordinate;
@@ -62,7 +61,7 @@ public class MovementComponent {
         }
     }
 
-    public int[] checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, Map map, String direction) {
+    private int[] checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, Map map, String direction) {
 
         if (newXCoordinate >= 0 && newXCoordinate < map.getMap()[0].length) {
         

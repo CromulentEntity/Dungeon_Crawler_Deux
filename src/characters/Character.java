@@ -25,7 +25,7 @@ public class Character {
         this.movementComponent = new MovementComponent();
     }
 
-    // Everything else
+    // General Methods
     public void move(Map map) {
         location = movementComponent.moveCharacter(location[0], location[1], map);
     }
@@ -72,6 +72,7 @@ public class Character {
         this.location[1] = yDirection;
     }
 
+    // toString
     @Override
     public String toString() {
         String output = "\nName: " + name +

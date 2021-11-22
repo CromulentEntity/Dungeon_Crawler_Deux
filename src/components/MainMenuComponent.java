@@ -12,14 +12,11 @@ import src.Map;
 import src.characters.Player;
 
 public class MainMenuComponent {
-    private Map map;
-    private Player player;
 
-    public MainMenuComponent(Map map, Player player) {
-        this.map = map;
-        this.player = player;
-    }
+    // Constructor
+    private MainMenuComponent() {}
 
+    // General Methods
     public static boolean actionSelect(Map map, Player player) {
         Scanner playerInput = new Scanner(System.in);
         String rawPlayerInput;

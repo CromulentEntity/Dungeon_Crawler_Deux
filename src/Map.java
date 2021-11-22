@@ -17,7 +17,7 @@ public class Map {
         map[0][0].isPlayerPresent(true);
     }
     
-    // Everything else
+    // General Methods
     private void generateMap() {
         map = new Tile[][] {
             {new Room(false), new Rock(), new Rock(), new Rock()},
@@ -31,6 +31,7 @@ public class Map {
         return map;
     }
 
+    // toString
     @Override
     public String toString() {
         String output = "== M A P ==\n";

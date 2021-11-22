@@ -1,7 +1,5 @@
 package src.characters;
 
-import src.Map;
-
 public class Goblin extends Character {
     static final String NAME = "Goblin";
     static final int HEALTH = 20;
@@ -9,6 +7,7 @@ public class Goblin extends Character {
     static final int BASEDAMAGE = 2;
     static final int[] STARTINGLOCATION = {3, 3};
     
+    // Constructor
     public Goblin() {
         super(NAME, HEALTH, MANA, BASEDAMAGE, STARTINGLOCATION);
     }

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import src.Bag;
 import src.ConsoleHelper;
-import src.Map;
 import src.items.Weapon;
 
 public class Player extends Character {
@@ -27,7 +26,7 @@ public class Player extends Character {
         bag.addWeaponToBag(new Weapon("Sord..", "Unspeakably shitty sword.", 0, 6, "Hand"));
     }
 
-    // Everything else
+    // General Methods
     public void gainExperience(int ammount) {
         this.experience += ammount;
     }
@@ -93,6 +92,7 @@ public class Player extends Character {
         return bag;
     }
 
+    // toString
     @Override
     public String toString() {
         String output = "== P L A Y E R   I N F O ==";

@@ -16,7 +16,7 @@ public class Bag {
         this.weapons = new ArrayList<>();
     }
 
-    // Everything else
+    // General Methods
     public void addWeaponToBag(Weapon weapon) {
         weapons.add(weapon);
     }
@@ -30,6 +30,7 @@ public class Bag {
         return weapons;
     }
 
+    // toString
     @Override
     public String toString() {
         String output = "Weapons:\n";
