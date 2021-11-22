@@ -21,7 +21,6 @@ public class MainMenuComponent {
     }
 
     public static boolean actionSelect(Map map, Player player) {
-        MovementComponent playerMovement = new MovementComponent(player, map);
         Scanner playerInput = new Scanner(System.in);
         String rawPlayerInput;
 
@@ -40,7 +39,7 @@ public class MainMenuComponent {
 
             case "2":
                 ConsoleHelper.clear();
-                playerMovement.moveCharacter();
+                player.move();
                 return false;
 
             case "3":

@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import src.Bag;
 import src.ConsoleHelper;
+import src.Map;
 import src.items.Weapon;
 
 public class Player extends Character {
@@ -17,8 +18,8 @@ public class Player extends Character {
     private Bag bag;
 
     // Constructor
-    public Player(String name) {
-        super(name, STARTINGHEALTH, STARTINGMANA, BASEDAMAGE, STARTINGLOCATION);
+    public Player(String name, Map map) {
+        super(name, STARTINGHEALTH, STARTINGMANA, BASEDAMAGE, STARTINGLOCATION, map);
         this.experience = 0;
         this.level = 1;
         this.bag = new Bag();

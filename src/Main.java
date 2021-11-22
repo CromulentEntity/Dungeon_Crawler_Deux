@@ -15,8 +15,8 @@ import src.components.MainMenuComponent;
 
 public class Main {
     public static void main(String[] args) {
-        Player player = initializePlayer();
         Map map = initializeMap();
+        Player player = initializePlayer(map);
         boolean exit = false;
 
         ConsoleHelper.clear();
@@ -27,7 +27,7 @@ public class Main {
         
     }
 
-    public static Player initializePlayer() {
+    public static Player initializePlayer(Map map) {
         Scanner playerInput = new Scanner(System.in);
         String playerName;
 
@@ -36,7 +36,7 @@ public class Main {
         System.out.print("Please enter your name: ");
         playerName = playerInput.nextLine();
 
-        return new Player(playerName);
+        return new Player(playerName, map);
     }
 
     public static Map initializeMap() {

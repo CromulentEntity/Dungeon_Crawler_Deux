@@ -1,5 +1,8 @@
 package src.characters;
 
+import src.Map;
+import src.components.MovementComponent;
+
 public class Character {
     private String name;
     private int health;
@@ -8,9 +11,10 @@ public class Character {
     private int maxMana;
     private int baseDamage;
     private int[] location; // Current X,Y coordinates on the map. Default is 0,0.
+    private MovementComponent movement;
 
     // Constructor
-    public Character(String name, int maxHealth, int maxMana, int baseDamage, int[] location) {
+    public Character(String name, int maxHealth, int maxMana, int baseDamage, int[] location, Map map) {
         this.name = name;
         this.health = maxHealth;
         this.maxHealth = maxHealth;
@@ -18,9 +22,14 @@ public class Character {
         this.maxMana = maxMana;
         this.baseDamage = baseDamage;
         this.location = location;
+        this.movement = new MovementComponent(map);
     }
 
     // Everything else
+    public void move() {
+        location = movement.moveCharacter(location[0], location[1]);
+    }
+
     public void loseHealth(int damage) {
         health = health - damage;
     }

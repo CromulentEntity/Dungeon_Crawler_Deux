@@ -1,5 +1,9 @@
 /* TODO:
  * An instance of this should be contained within each character that moves, not the other way around as it currently is.
+ * Currently this class takes in the player object and the map object. To make the above changes, we can change the player object
+ * input to instead be the x and y coordinates of the character (the only thing accessed from the player object in this class). Likewise,
+ * the map should be replacable with the current games map length and width, and moving the call to "map.toString" out of this method
+ * and placing it before the moveCharater() method call.
 */ 
 
 package src.components;
@@ -8,28 +12,24 @@ import java.util.Scanner;
 
 import src.ConsoleHelper;
 import src.Map;
-import src.characters.Character;
 import src.tiles.Tile;
 
 public class MovementComponent {
-    Character character;
     Map map;
 
-    public MovementComponent(Character character, Map map) {
-        this.character = character;
+    public MovementComponent(Map map) {
         this.map = map;
     }
 
-    public void moveCharacter() {
+    public int[] moveCharacter(int currentXCoordinate, int currentYCoordinate) {
         Scanner playerInput = new Scanner(System.in);
-        int currentXCoordinate = character.getLocation()[0];
-        int currentYCoordinate = character.getLocation()[1];
         int newXCoordinate;
         int newYCoordinate;
 
         ConsoleHelper.clear();
 
-        System.out.print(map.toString());
+        // Move the following line out of this method. Insert it before each call to moveCharacter()
+        // System.out.print(map.toString());
         System.out.println("\nWhat direction would you like to move?");
         String[] choiceList = {"North", "South", "East", "West"};
         ConsoleHelper.printChoices(choiceList);
@@ -42,49 +42,47 @@ public class MovementComponent {
             case "1":
                 newXCoordinate = currentXCoordinate;
                 newYCoordinate = currentYCoordinate - 1;
-                checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "North");
-                break;
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "North");
 
             case "2":
                 newXCoordinate = currentXCoordinate;
                 newYCoordinate = currentYCoordinate + 1;
-                checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "South");
-                break;
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "South");
 
             case "3":
                 newXCoordinate = currentXCoordinate + 1;
                 newYCoordinate = currentYCoordinate;
-                checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "East");
-                break;
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "East");
                 
             case "4":
                 newXCoordinate = currentXCoordinate - 1;
                 newYCoordinate = currentXCoordinate;
-                checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "West");
-                break;
+                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, "West");
 
             default:
                 System.out.println("That is not a valid input! Hiss!\n"); 
-                moveCharacter();
-                break;
+                return moveCharacter(currentXCoordinate, currentYCoordinate);
         }
     }
 
-    public void checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, String direction) {
+    public int[] checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, String direction) {
+
         if (newXCoordinate >= 0 && newXCoordinate < map.getMap()[0].length) {
+        
             if (newYCoordinate >=0 && newYCoordinate < map.getMap().length) {
                 Tile currentTile = map.getMap()[currentYCoordinate][currentXCoordinate];
                 Tile newTile = map.getMap()[newYCoordinate][newXCoordinate];
 
                 if (newTile.tileCanBeEntered()) {
                     System.out.println("You move to the " + direction + ".\n");
-                    character.setLocation(newXCoordinate, newYCoordinate);
                     currentTile.isPlayerPresent(false);
                     newTile.isPlayerPresent(true);
-
+                    return new int[] {newXCoordinate, newYCoordinate};
                 }
                 
-            } else { System.out.println("That location lies outside of the map.\n") ;}
-        } else { System.out.println("That location lies outside of the map.\n") ;}
+            } else { System.out.println("That location lies outside of the map.\n"); }
+        } else { System.out.println("That location lies outside of the map.\n"); }
+
+        return new int[] {currentXCoordinate, currentYCoordinate};
     }
 }
