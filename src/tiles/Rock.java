@@ -3,10 +3,13 @@
 package src.tiles;
 
 public class Rock extends Tile {
+    static final String ICON = "■";
+    static final boolean ISSOLID = true;
+    static final boolean ISLOCKED = false;
     
     // Constructor
     public Rock () {
-        super("■", true, false);
+        super(ICON, ISSOLID, ISLOCKED);
     }
 
 }
