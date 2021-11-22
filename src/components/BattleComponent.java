@@ -18,6 +18,7 @@ public class BattleComponent {
     }
 
     // General Methods
+    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     public boolean battle() {
         Scanner playerInput = new Scanner(System.in);
         
@@ -58,6 +59,7 @@ public class BattleComponent {
         else { turn = 0; }
     }
 
+    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     private Character chooseTarget() {
         Scanner playerInput = new Scanner(System.in);
         int rawInput;

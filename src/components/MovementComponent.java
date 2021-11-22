@@ -17,6 +17,7 @@ import src.tiles.Tile;
 public class MovementComponent {
 
     // General Methods
+    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     public int[] moveCharacter(int currentXCoordinate, int currentYCoordinate, Map map) {
         Scanner playerInput = new Scanner(System.in);
         int newXCoordinate;

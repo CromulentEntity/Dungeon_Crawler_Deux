@@ -17,6 +17,7 @@ public class MainMenuComponent {
     private MainMenuComponent() {}
 
     // General Methods
+    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     public static boolean actionSelect(Map map, Player player) {
         Scanner playerInput = new Scanner(System.in);
         String rawPlayerInput;

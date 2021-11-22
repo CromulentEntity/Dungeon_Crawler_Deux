@@ -13,6 +13,7 @@ import java.util.Scanner;
 import src.characters.Player;
 import src.components.MainMenuComponent;
 
+@SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
 public class Main {
     public static void main(String[] args) {
         Map map = initializeMap();
@@ -24,7 +25,6 @@ public class Main {
         while(!exit) {
             exit = MainMenuComponent.actionSelect(map, player);
         }
-        
     }
 
     public static Player initializePlayer() {

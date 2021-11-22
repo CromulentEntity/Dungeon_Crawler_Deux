@@ -42,6 +42,7 @@ public class Player extends Character {
         }
     }
 
+    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     public void equipWeapon() {
         Scanner playerInput = new Scanner(System.in);
 
