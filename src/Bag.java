@@ -33,9 +33,9 @@ public class Bag {
     // toString
     @Override
     public String toString() {
-        String output = "Weapons:\n";
+        String output = "== B A G ==\nWeapons:\n";
         for(int x = 0; x < weapons.size(); x++) {
-            output += (weapons.get(x).toString() + "\n");
+            output += (weapons.get(x).toString());
         }
 
         return output;

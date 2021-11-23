@@ -5,6 +5,7 @@
 
 package src.components;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import src.ConsoleHelper;
@@ -44,9 +45,13 @@ public class MainMenuComponent {
                 return false;
 
             case "3":
-                Goblin deezNuts = new Goblin();
-                Actor[] enemies = {new Rat(), deezNuts};
+                ConsoleHelper.clear();
+                ArrayList<Actor> enemies = new ArrayList<>();
+                enemies.add(new Goblin());
+                enemies.add(new Rat());
                 BattleInstance battleInstance = new BattleInstance(player, enemies);
+                battleInstance.battle();
+                return false;
 
             case "4":
                 ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
@@ -54,7 +59,7 @@ public class MainMenuComponent {
 
             case "5":
                 ConsoleHelper.displayInfoScreen( new String[] {map.toString(), 
-                    ("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1] + "\n")});
+                    ("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1])});
                 return false;
 
             case "6":

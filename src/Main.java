@@ -4,6 +4,7 @@
  * Make a battle dialogue
  * Write tests (e.g. Unequip starting weapon, Equip spare weapon, make sure spare weapon is equip and starting weapon is in bag)
  * Maybe remove instance variables from certain objects (like MainMenuComponent) and include them as method inputs instead
+ * Adding range validation to console helper to ensure input is within a range (forget why but had to write this down)
  * 
 */
 

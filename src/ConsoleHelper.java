@@ -15,7 +15,7 @@ public class ConsoleHelper {
     }
 
     public static void enterToContinue() {
-        System.out.println("Press enter to continue.");
+        System.out.println("\nPress enter to continue.");
         playerInput.nextLine();
         clear();
     }

@@ -25,8 +25,7 @@ public class MovementComponent {
 
         ConsoleHelper.clear();
 
-        // Move the following line out of this method. Insert it before each call to moveActor()
-        // System.out.print(map.toString());
+        System.out.print(map.toString());
         System.out.println("\nWhat direction would you like to move?");
         String[] choiceList = {"North", "South", "East", "West"};
         ConsoleHelper.printChoices(choiceList);

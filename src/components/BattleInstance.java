@@ -1,5 +1,7 @@
 package src.components;
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import src.ConsoleHelper;
@@ -7,11 +9,11 @@ import src.actors.Actor;
 
 public class BattleInstance {
     Actor player;
-    Actor[] enemies;
+    ArrayList<Actor> enemies;
     int turn;
 
     // Constructor
-    public BattleInstance(Actor player, Actor[] enemies) {
+    public BattleInstance(Actor player, ArrayList<Actor> enemies) {
         this.player = player;
         this.enemies = enemies;
         this.turn = 0;
@@ -19,7 +21,7 @@ public class BattleInstance {
 
     // General Methods
     public boolean battle() {
-        while(player.getHealth() > 0 && enemies.length > 0)  {
+        while(player.getHealth() > 0 && !enemies.isEmpty())  {
             turn();
         }
 
@@ -33,7 +35,7 @@ public class BattleInstance {
         if (turn == 0) {
             // Player does things
             System.out.println("It is your turn.\n");
-            String[] choiceList = {"Attack"};
+            String[] choiceList = {"Attack", "Examine Enemies"};
             ConsoleHelper.printChoices(choiceList);
             
             String rawInput = playerInput.nextLine();
@@ -42,10 +44,18 @@ public class BattleInstance {
                 case "1":
                     ConsoleHelper.clear();
                     Actor target = chooseTarget();
-                    System.out.println("You swing at the " + target.getName() + ", dealing ??? damage!");
+                    ConsoleHelper.clear();
                     player.attack(target);
-                    // Remove enemy from list if dead.
+                    checkEnemyHealth(target);
                     advanceTurn();
+                    break;
+
+                case "2":
+                    ConsoleHelper.clear();
+                    Actor targetActor = chooseTarget();
+                    ConsoleHelper.clear();
+                    System.out.println(targetActor.toString());
+                    ConsoleHelper.enterToContinue();
                     break;
                 
                 default:
@@ -56,14 +66,18 @@ public class BattleInstance {
 
         } else {
             // Enemies do things
-            enemies[turn-1].attack(player);
+            System.out.println("\nIt is the " + enemies.get(turn-1).getName() + "\'s turn.");
+            enemies.get(turn-1).attack(player);
             advanceTurn();
         }
     }
 
     private void advanceTurn() {
-        if (turn < enemies.length) { turn++; }
-        else { turn = 0; }
+        if (turn < enemies.size()) { turn++; }
+        else { 
+            turn = 0;
+            ConsoleHelper.enterToContinue();
+        }
     }
 
     private Actor chooseTarget() {
@@ -71,14 +85,22 @@ public class BattleInstance {
         Scanner playerInput = new Scanner(System.in);
         int rawInput;
 
-        for (int i = 0; i < enemies.length; i++) {
-            System.out.println((i+1) + ". " + enemies[i].getName());
+        for (int i = 0; i < enemies.size(); i++) {
+            System.out.println((i+1) + ". " + enemies.get(i).getName());
         }
 
-        System.out.print("Choose a target: ");
+        System.out.print("\nChoose a target: ");
         rawInput = playerInput.nextInt();
 
-        return enemies[rawInput-1];
+        return enemies.get(rawInput-1);
         
+    }
+
+    private void checkEnemyHealth(Actor enemyActor) {
+        if (enemyActor.getHealth() <= 0) {
+            System.out.println(enemyActor.getName() + " has perished!");
+            int enemyActorIndex = enemies.indexOf(enemyActor);
+            enemies.remove(enemyActorIndex);
+        }
     }
 }

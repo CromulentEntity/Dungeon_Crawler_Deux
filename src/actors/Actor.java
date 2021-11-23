@@ -75,7 +75,7 @@ public class Actor {
     // toString
     @Override
     public String toString() {
-        String output = "\nName: " + name +
+        String output = "Name: " + name +
             "\nHealth: " + health + "/" + maxHealth +
             "\nMana: " + mana + "/" + maxMana +
             "\nDamage: " + baseDamage +
