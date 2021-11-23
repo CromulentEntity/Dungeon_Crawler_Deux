@@ -3,12 +3,12 @@
 package src.actors;
 
 public class Rat extends Actor{
-    static final String NAME = "Rat";
-    static final int HEALTH = 6;
-    static final int ARMOR = 0;
-    static final int MANA = 1200;
-    static final int BASEDAMAGE = 1;
-    static final int[] STARTINGLOCATION = {2, 2};
+    private static final String NAME = "Rat";
+    private static final int HEALTH = 6;
+    private static final int ARMOR = 0;
+    private static final int MANA = 1200;
+    private static final int BASEDAMAGE = 1;
+    private static final int[] STARTINGLOCATION = {2, 2};
 
     // Constructor
     public Rat() {

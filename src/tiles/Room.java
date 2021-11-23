@@ -3,8 +3,8 @@
 package src.tiles;
 
 public class Room extends Tile {
-    static final String ICON = "□";
-    static final boolean ISSOLID = false;
+    private static final String ICON = "□";
+    private static final boolean ISSOLID = false;
 
     // Constructor
     public Room(boolean isLocked) {

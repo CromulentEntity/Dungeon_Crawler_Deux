@@ -10,9 +10,9 @@ import src.actors.Actor;
 import src.actors.Player;
 
 public class BattleInstance {
-    Player player;
-    ArrayList<Actor> enemies;
-    int turn;
+    private Player player;
+    private ArrayList<Actor> enemies;
+    private int turn;
 
     // Constructor
     public BattleInstance(Player player, ArrayList<Actor> enemies) {

@@ -3,9 +3,9 @@
 package src.tiles;
 
 public class Rock extends Tile {
-    static final String ICON = "■";
-    static final boolean ISSOLID = true;
-    static final boolean ISLOCKED = false;
+    private static final String ICON = "■";
+    private static final boolean ISSOLID = true;
+    private static final boolean ISLOCKED = false;
     
     // Constructor
     public Rock () {
