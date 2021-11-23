@@ -1,3 +1,5 @@
+// Holds various items for the player.
+
 // I see two ways of implementing this.
 // The bag can be a single linked-list of node objects which contain whatever item.
 // Or it can multiple linked lists / an array, each for a specific type of item.

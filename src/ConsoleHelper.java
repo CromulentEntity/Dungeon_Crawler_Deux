@@ -1,3 +1,6 @@
+// Collection of commonly used System.out type code bits.
+// Helps keep menu elements consistent between classes and greatly reduces duplicate code.
+
 package src;
 
 import java.util.Scanner;
@@ -8,7 +11,7 @@ public class ConsoleHelper {
     // Constructor
     private ConsoleHelper() {}
 
-    // General MEthods
+    // General Methods
     public static void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();

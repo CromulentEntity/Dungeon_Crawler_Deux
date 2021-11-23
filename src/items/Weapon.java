@@ -1,3 +1,5 @@
+// Weapon. Currently quite generic. May create subclasses for specific weapon types. (Probably a good idea)
+
 package src.items;
 
 public class Weapon extends Item {
@@ -9,7 +11,6 @@ public class Weapon extends Item {
         super(name, description, value);
         this.damage = damage;
         this.slot = slot;
-
     }
 
     // Gets

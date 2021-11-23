@@ -1,7 +1,4 @@
-/* TODO:
- * Try and seperate out more of the switch statement into other methods, particularly the ConsoleHelper
- *
-*/
+// The main screen you'll be looking at. Perhaps "component" isn't the correct term?
 
 package src.components;
 
@@ -21,8 +18,8 @@ public class MainMenuComponent {
     private MainMenuComponent() {}
 
     // General Methods
-    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     public static boolean actionSelect(Map map, Player player) {
+        @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
         Scanner playerInput = new Scanner(System.in);
         String rawPlayerInput;
 

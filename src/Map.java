@@ -1,3 +1,5 @@
+// Holds all of the rooms which make up the game space.
+
 package src;
 
 import src.tiles.Rock;

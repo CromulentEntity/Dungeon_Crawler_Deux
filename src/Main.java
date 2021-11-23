@@ -1,15 +1,8 @@
-/* TODO:
- * Use better data structures for some things (e.g. Linked List in backpack)
- * Learn what a string builder is
- * Make a battle dialogue
- * Write tests (e.g. Unequip starting weapon, Equip spare weapon, make sure spare weapon is equip and starting weapon is in bag)
- * Maybe remove instance variables from certain objects (like MainMenuComponent) and include them as method inputs instead
- * Adding range validation to console helper to ensure input is within a range (forget why but had to write this down)
- * Add rewards for winning battles. Perhaps create a loot / exp pool at the start of the battle and give it to the player if they win.
- * Enemie objects should contain mention how much experience they are worth
- * Make sure negative damage caused by armor damage reduction doesn't heal the player or enemies
+/* Entry point for the program.
  * 
-*/
+ * TODO:
+ * Learn what a string builder is
+ */
 
 package src;
 import java.util.Scanner;
@@ -17,7 +10,6 @@ import java.util.Scanner;
 import src.actors.Player;
 import src.components.MainMenuComponent;
 
-@SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
 public class Main {
     public static void main(String[] args) {
         Map map = initializeMap();
@@ -32,6 +24,7 @@ public class Main {
     }
 
     public static Player initializePlayer() {
+        @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
         Scanner playerInput = new Scanner(System.in);
         String playerName;
 
@@ -44,6 +37,7 @@ public class Main {
     }
 
     public static Map initializeMap() {
+        @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
         Scanner playerInput = new Scanner(System.in);
         int mapXLength;
         int mapYLength;

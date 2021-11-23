@@ -1,3 +1,5 @@
+// Goblin creature.
+
 package src.actors;
 
 public class Goblin extends Actor {

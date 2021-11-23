@@ -2,13 +2,16 @@
 class Actor {
     - name : String
     - health : int
+    - armor : int
     - maxHealth : int
     - mana : int
     - maxMana : int
     - baseDamage : int
     - location : int[]
+    - movementComponent : MovementComponent
     --
     .. General ..
+    move(map : Map)
     loseHealth(damage : int)
     gainHealth(healing : int)
     attack(targetActor : Actor)
@@ -16,16 +19,20 @@ class Actor {
     .. Gets ..
     getName() : String
     getHealth() : int
+    getMaxHealth() : int
+    getArmor() : int
     getMana() : int
-    getLocation() : int
+    getMaxMana() : int
+    getLocation() : int[]
     .. Sets ..
     setHealth(health : int)
     setMana(mana : int)
-    setLocation(xDimensions : int, yDimensions : int)
+    setLocation(xDirection : int, yDirection : int)
 }
 
 class Player {
     - STARTINGHEALTH : int = 100
+    - STARTINGARMOR : int = 5
     - STARTINGMANA : int = 100
     - BASEDAMAGE : int = 5
     - STARTINGLOCATION : int[] = {0, 0}
@@ -47,18 +54,20 @@ class Player {
 }
 
 class Goblin {
-    - NAME : String = Goblin
+    - NAME : String = "Goblin"
     - HEALTH : int = 20
+    - ARMOR : int = 5
     - MANA : int = 0
     - BASEDAMAGE : int = 2
     - STARTINGLOCATION : int[] = {3, 3}
 }
 
 class Rat {
-    - NAME : String = Rat
+    - NAME : String = "Rat"
     - HEALTH : int = 6
+    - ARMOR : int = 0
     - MANA : int = 1200
-    - BASEDAMAGE : int = 0
+    - BASEDAMAGE : int = 1
     - STARTINGLOCATION : int[] = {2, 2}
 }
 
@@ -66,19 +75,21 @@ class Rat {
 
 class MovementComponent {
     .. General ..
-    moveActor(currentXCoordinate : int, currentYCoordinate : int, map : Map)
-    checkCollisions(int, int, int, int, String)
+    moveActor(currentXCoordinate : int, currentYCoordinate : int, map : Map) : int[]
+    checkCollisions(int, int, int, int, Map, String) : int[]
 }
 
-class BattleComponent {
-    - player : Actor
-    - enemies : Actor[]
+class BattleInstance {
+    - player : Player
+    - enemies : ArrayList<Actor>
     - turn : int
     --
     .. General ..
     battle() : boolean
+    turn()
     advanceTurn()
     chooseTarget() : Actor
+    checkEnemyHealth(enemyActor : Actor)
 }
 
 class MainMenuComponent {
@@ -120,40 +131,41 @@ class Tile {
     -isPassable : boolean
     --
     .. General ..
-    updateIsPassable()
-    tileCanBeEntered()
+    updateIsPassable() : boolean
+    tileCanBeEntered() : boolean
     isPlayerPresent(boolean)
     .. Gets ..
-    getActiveIcon()
-    getIsPassable()
-    getIsSolid()
-    getIsLocked()
+    getActiveIcon() : String
+    getIsPassable() : boolean
+    getIsSolid() : boolean
+    getIsLocked() : boolean
     .. Sets ..
-    setIsLocked(boolean)
-    setIsSolid(boolean)
+    setIsLocked(isLocked : boolean)
+    setIsSolid(isSolid : boolean)
 }
 
 class Rock {
-    -ICON : "■"
-    -ISSOLID : true
-    -ISLOCKED : false
+    -ICON : String = "■"
+    -ISSOLID : boolean = true
+    -ISLOCKED : boolean = false
 }
 
 class Room {
-    -ICON : "□"
-    -ISSOLID : false
+    -ICON : String = "□"
+    -ISSOLID : boolean = false
 }
 
 
 
 class Main {
     .. General ..
+    main(args : String[])
     initializePlayer() : Player
     initializeMap() : Map
 }
 
 class Map {
-    - map : Tile[][]
+    - mapArray : Tile[][]
     - xDimensions : int
     - yDimensions : int
     --
@@ -175,6 +187,8 @@ class Bag {
     getWeapons() : ArrayList<Weapon>
 }
 
+
+
 Tile <|-- Rock : < is a
 Tile <|-- Room : < is a
 
@@ -192,7 +206,7 @@ Bag "1" o-- "Many" Weapon : contains >
 MainMenuComponent "1" *-- "1" Player : Relies on >
 MainMenuComponent "1" *-- "1" Map : Relies on >
 
-BattleComponent "1" *-- "Many" Actor : Requires >
+BattleInstance "1" *-- "Many" Actor : Requires >
 
 Main "1" *-- "1" Player : Relies on >
 Main "1" *-- "1" Map : Relies on >

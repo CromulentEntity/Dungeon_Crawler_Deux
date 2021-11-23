@@ -1,6 +1,7 @@
+// An instance of battle. Takes in a player and list of enemies, handles combat, pays out rewards.
+
 package src.components;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 

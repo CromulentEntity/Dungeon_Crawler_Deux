@@ -1,3 +1,5 @@
+// Tile superclass, defines the attributes of each tile on the map. 
+
 package src.tiles;
 
 public class Tile {

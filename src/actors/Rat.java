@@ -1,3 +1,5 @@
+// A Rat. Why does it have so much mana?
+
 package src.actors;
 
 public class Rat extends Actor{

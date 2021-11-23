@@ -1,3 +1,5 @@
+// Actor superclass, defines characteristics that entities such as players or enemies will use or re-implement.
+
 package src.actors;
 
 import src.Map;

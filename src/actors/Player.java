@@ -1,3 +1,5 @@
+// The Player. Does things a person would do.
+
 package src.actors;
 
 import java.util.Scanner;

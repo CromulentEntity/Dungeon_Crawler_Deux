@@ -1,4 +1,7 @@
+// Item superclass, defines what attributes every item will have.
+
 package src.items;
+
 public class Item {
     private String name;
     private String description;
