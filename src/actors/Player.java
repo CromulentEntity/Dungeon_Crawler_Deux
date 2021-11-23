@@ -13,16 +13,19 @@ public class Player extends Actor {
     private static final int STARTINGARMOR = 5;
     private static final int STARTINGMANA = 100;
     private static final int BASEDAMAGE = 5;
+    private static final int EXPVALUE = 0;
     private static final int[] STARTINGLOCATION = {0, 0};
     private Weapon weapon;
     private int experience;
+    private int experienceToNextLevel;
     private int level;
     private Bag bag;
 
     // Constructor
     public Player(String name) {
-        super(name, STARTINGHEALTH, STARTINGARMOR, STARTINGMANA, BASEDAMAGE, STARTINGLOCATION);
+        super(name, STARTINGHEALTH, STARTINGARMOR, STARTINGMANA, BASEDAMAGE, EXPVALUE, STARTINGLOCATION);
         this.experience = 0;
+        this.experienceToNextLevel = 100;
         this.level = 1;
         this.bag = new Bag();
         this.weapon = new Weapon("Bronze Dagger", "We all gotta start somewhere.", 0, 15, "Hand");
@@ -31,7 +34,36 @@ public class Player extends Actor {
 
     // General Methods
     public void gainExperience(int ammount) {
-        this.experience += ammount;
+        System.out.println("You gain " + ammount + " experience.");
+        experience += ammount;
+
+        if (experience >= experienceToNextLevel) {
+            levelUp();
+        }
+    }
+
+    public void levelUp() {
+        System.out.println("\nYou have reached level " + (level+1) + "!");
+        experience = experience - experienceToNextLevel;
+        level += 1;
+        experienceToNextLevel += 100;
+
+        // Increase Max Health & Heal
+        int newMaxHealth = super.getMaxHealth() + 20;
+        System.out.println("Max health has increased from " + super.getMaxHealth() + " to " + newMaxHealth + ".");
+        super.setMaxHealth(newMaxHealth);
+        super.setHealth(newMaxHealth);
+
+        // Increase Max Mana & Set to Max
+        int newMaxMana = super.getMaxMana() + 10;
+        System.out.println("Max mana has increased from " + super.getMaxMana() + " to " + newMaxMana + ".");
+        super.setMaxMana(newMaxMana);
+        super.setMana(newMaxMana);
+
+        // Increase Base Damage
+        int newBaseDamage = super.getBaseDamage() + 2;
+        System.out.println("Base damage has increased from " + super.getBaseDamage() + " to " + newBaseDamage + ".");
+        super.setBaseDamage(newBaseDamage);
     }
 
     @Override
@@ -111,7 +143,7 @@ public class Player extends Actor {
             output += "\nWeapon Damage: " + weapon.getDamage();
         }
 
-        output += "\nExperience: " + this.experience + 
+        output += "\nExperience: " + this.experience + "/" + this.experienceToNextLevel +
                     "\nLevel: " + this.level;
 
         return output;

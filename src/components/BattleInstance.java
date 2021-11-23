@@ -13,12 +13,18 @@ public class BattleInstance {
     private Player player;
     private ArrayList<Actor> enemies;
     private int turn;
+    private int expPrizePool;
 
     // Constructor
     public BattleInstance(Player player, ArrayList<Actor> enemies) {
         this.player = player;
         this.enemies = enemies;
         this.turn = 0;
+        this.expPrizePool = 0;
+
+        for (int i = 0; i < enemies.size(); i++) {
+            this.expPrizePool += enemies.get(i).getExpValue();
+        }
     }
 
     // General Methods
@@ -29,7 +35,9 @@ public class BattleInstance {
         }
 
         if (player.getHealth() > 0) {
-            System.out.println("You emerge victorious!\n");
+            System.out.println("You emerge victorious!");
+            player.gainExperience(expPrizePool);
+            ConsoleHelper.enterToContinue();
             return true;
         } else {
             System.out.println("You have been defeated....");

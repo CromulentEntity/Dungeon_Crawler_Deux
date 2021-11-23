@@ -8,10 +8,11 @@ public class Rat extends Actor{
     private static final int ARMOR = 0;
     private static final int MANA = 1200;
     private static final int BASEDAMAGE = 1;
+    private static final int EXPVALUE = 2;
     private static final int[] STARTINGLOCATION = {2, 2};
 
     // Constructor
     public Rat() {
-        super(NAME, HEALTH, ARMOR, MANA, BASEDAMAGE, STARTINGLOCATION);
+        super(NAME, HEALTH, ARMOR, MANA, BASEDAMAGE, EXPVALUE, STARTINGLOCATION);
     }
 }

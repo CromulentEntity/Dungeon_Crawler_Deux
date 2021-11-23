@@ -13,11 +13,12 @@ public class Actor {
     private int mana;
     private int maxMana;
     private int baseDamage;
+    private int expValue;
     private int[] location; // Current X,Y coordinates on the map. Default is 0,0.
     private MovementComponent movementComponent;
 
     // Constructor
-    public Actor(String name, int maxHealth, int armor, int maxMana, int baseDamage, int[] location) {
+    public Actor(String name, int maxHealth, int armor, int maxMana, int baseDamage, int expValue, int[] location) {
         this.name = name;
         this.health = maxHealth;
         this.armor = armor;
@@ -25,6 +26,7 @@ public class Actor {
         this.mana = maxMana;
         this.maxMana = maxMana;
         this.baseDamage = baseDamage;
+        this.expValue = expValue;
         this.location = location;
         this.movementComponent = new MovementComponent();
     }
@@ -71,6 +73,12 @@ public class Actor {
     public int getMaxMana() {
         return maxMana;
     }
+    public int getBaseDamage() {
+        return baseDamage;
+    }
+    public int getExpValue() {
+        return expValue;
+    }
     public int[] getLocation() {
         return location;
     }
@@ -79,8 +87,17 @@ public class Actor {
     public void setHealth(int health) {
         this.health = health;
     }
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
     public void setMana(int mana) {
         this.mana = mana;
+    }
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
+    public void setBaseDamage(int baseDamage) {
+        this.baseDamage = baseDamage;
     }
     public void setLocation(int xDirection, int yDirection) {
         this.location[0] = xDirection;
