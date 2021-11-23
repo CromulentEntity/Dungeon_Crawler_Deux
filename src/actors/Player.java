@@ -1,4 +1,4 @@
-package src.characters;
+package src.actors;
 
 import java.util.Scanner;
 
@@ -6,7 +6,7 @@ import src.Bag;
 import src.ConsoleHelper;
 import src.items.Weapon;
 
-public class Player extends Character {
+public class Player extends Actor {
     private static final int STARTINGHEALTH = 100;
     private static final int STARTINGMANA = 100;
     private static final int BASEDAMAGE = 5;
@@ -32,13 +32,13 @@ public class Player extends Character {
     }
 
     @Override
-    public void attack(Character targetCharacter) {
+    public void attack(Actor targetActor) {
         if (weapon != null) { 
-            System.out.println(getName() + " attacks " + targetCharacter.getName() + ", dealing " + weapon.getDamage() + " damage!");
-            targetCharacter.loseHealth(weapon.getDamage());
+            System.out.println(getName() + " attacks " + targetActor.getName() + ", dealing " + weapon.getDamage() + " damage!");
+            targetActor.loseHealth(weapon.getDamage());
 
         } else { 
-            targetCharacter.loseHealth(BASEDAMAGE); 
+            targetActor.loseHealth(BASEDAMAGE); 
         }
     }
 

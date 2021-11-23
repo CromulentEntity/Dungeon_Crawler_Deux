@@ -10,7 +10,7 @@
 package src;
 import java.util.Scanner;
 
-import src.characters.Player;
+import src.actors.Player;
 import src.components.MainMenuComponent;
 
 @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide

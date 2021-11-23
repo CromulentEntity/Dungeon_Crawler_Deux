@@ -3,23 +3,31 @@ package src.components;
 import java.util.Scanner;
 
 import src.ConsoleHelper;
-import src.characters.Character;
+import src.actors.Actor;
 
-public class BattleComponent {
-    Character player;
-    Character[] enemies;
+public class BattleInstance {
+    Actor player;
+    Actor[] enemies;
     int turn;
 
     // Constructor
-    public BattleComponent(Character player, Character[] enemies) {
+    public BattleInstance(Actor player, Actor[] enemies) {
         this.player = player;
         this.enemies = enemies;
         this.turn = 0;
     }
 
     // General Methods
-    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
     public boolean battle() {
+        while(player.getHealth() > 0 && enemies.length > 0)  {
+            turn();
+        }
+
+        return (player.getHealth() > 0);
+    }
+
+    public void turn() {
+        @SuppressWarnings("resource") // Can't close playerInput because it will kill System.in program-wide
         Scanner playerInput = new Scanner(System.in);
         
         if (turn == 0) {
@@ -33,8 +41,10 @@ public class BattleComponent {
             switch (rawInput) {
                 case "1":
                     ConsoleHelper.clear();
-                    Character target = chooseTarget();
+                    Actor target = chooseTarget();
+                    System.out.println("You swing at the " + target.getName() + ", dealing ??? damage!");
                     player.attack(target);
+                    // Remove enemy from list if dead.
                     advanceTurn();
                     break;
                 
@@ -42,16 +52,13 @@ public class BattleComponent {
                     ConsoleHelper.clear();
                     System.out.println("That is not a valid input! Hiss!\n");
                     break;
-
-
             }
+
         } else {
             // Enemies do things
             enemies[turn-1].attack(player);
+            advanceTurn();
         }
-
-        // Temporary return statement for compiling purposes
-        return true;
     }
 
     private void advanceTurn() {
@@ -59,8 +66,8 @@ public class BattleComponent {
         else { turn = 0; }
     }
 
-    @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
-    private Character chooseTarget() {
+    private Actor chooseTarget() {
+        @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
         Scanner playerInput = new Scanner(System.in);
         int rawInput;
 

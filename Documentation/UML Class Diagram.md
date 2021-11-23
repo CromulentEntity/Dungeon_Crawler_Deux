@@ -1,5 +1,5 @@
 @startuml
-class Character {
+class Actor {
     - name : String
     - health : int
     - maxHealth : int
@@ -11,7 +11,7 @@ class Character {
     .. General ..
     loseHealth(damage : int)
     gainHealth(healing : int)
-    attack(targetCharacter : Character)
+    attack(targetActor : Actor)
     toString() : String
     .. Gets ..
     getName() : String
@@ -36,7 +36,7 @@ class Player {
     --
     .. General ..
     gainExperience(ammount : int)
-    attack(targetCharacter : Character)
+    attack(targetActor : Actor)
     equipWeapon()
     removeWeapon()
     toString()
@@ -66,25 +66,22 @@ class Rat {
 
 class MovementComponent {
     .. General ..
-    moveCharacter(currentXCoordinate : int, currentYCoordinate : int, map : Map)
+    moveActor(currentXCoordinate : int, currentYCoordinate : int, map : Map)
     checkCollisions(int, int, int, int, String)
 }
 
 class BattleComponent {
-    - player : Character
-    - enemies : Character[]
+    - player : Actor
+    - enemies : Actor[]
     - turn : int
     --
     .. General ..
     battle() : boolean
     advanceTurn()
-    chooseTarget() : Character
+    chooseTarget() : Actor
 }
 
 class MainMenuComponent {
-    - map : Map
-    - player : Player
-    --
     .. General ..
     actionSelect(map : Map, player : Player) : boolean
 }
@@ -181,10 +178,10 @@ class Bag {
 Tile <|-- Rock : < is a
 Tile <|-- Room : < is a
 
-Character <|-- Player : < is a
-Character <|-- Rat : < is a
-Character <|-- Goblin : < is a
-Character "1" *-- "1" MovementComponent : < part of
+Actor <|-- Player : < is a
+Actor <|-- Rat : < is a
+Actor <|-- Goblin : < is a
+Actor "1" *-- "1" MovementComponent : < part of
 
 Item <|-- Weapon : < is an
 
@@ -195,7 +192,7 @@ Bag "1" o-- "Many" Weapon : contains >
 MainMenuComponent "1" *-- "1" Player : Relies on >
 MainMenuComponent "1" *-- "1" Map : Relies on >
 
-BattleComponent "1" *-- "Many" Character : Requires >
+BattleComponent "1" *-- "Many" Actor : Requires >
 
 Main "1" *-- "1" Player : Relies on >
 Main "1" *-- "1" Map : Relies on >

@@ -5,7 +5,7 @@ import src.tiles.Room;
 import src.tiles.Tile;
 
 public class Map {
-    private Tile[][] map;
+    private Tile[][] mapArray;
     private int xDimensions;
     private int yDimensions;
 
@@ -14,12 +14,12 @@ public class Map {
         this.xDimensions = xDimensions;
         this.yDimensions = yDimensions;
         generateMap();
-        map[0][0].isPlayerPresent(true);
+        mapArray[0][0].isPlayerPresent(true);
     }
     
     // General Methods
     private void generateMap() {
-        map = new Tile[][] {
+        mapArray = new Tile[][] {
             {new Room(false), new Rock(), new Rock(), new Rock()},
             {new Room(false), new Rock(), new Room(false), new Rock()},
             {new Room(false), new Room(false), new Room(false), new Room(false)},
@@ -28,16 +28,16 @@ public class Map {
 
     // Gets
     public Tile[][] getMap() {
-        return map;
+        return mapArray;
     }
 
     // toString
     @Override
     public String toString() {
         String output = "== M A P ==\n";
-        for(int y = 0; y < map.length; y++) {
-            for(int x = 0; x < map[0].length; x++) {
-                output += map[y][x].getActiveIcon() + " ";
+        for(int y = 0; y < mapArray.length; y++) {
+            for(int x = 0; x < mapArray[0].length; x++) {
+                output += mapArray[y][x].getActiveIcon() + " ";
             }
             output += "\n";
         }

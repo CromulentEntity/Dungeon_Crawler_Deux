@@ -1,6 +1,6 @@
-package src.characters;
+package src.actors;
 
-public class Goblin extends Character {
+public class Goblin extends Actor {
     static final String NAME = "Goblin";
     static final int HEALTH = 20;
     static final int MANA = 0;

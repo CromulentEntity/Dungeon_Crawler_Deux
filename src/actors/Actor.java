@@ -1,9 +1,9 @@
-package src.characters;
+package src.actors;
 
 import src.Map;
 import src.components.MovementComponent;
 
-public class Character {
+public class Actor {
     private String name;
     private int health;
     private int maxHealth;
@@ -14,7 +14,7 @@ public class Character {
     private MovementComponent movementComponent;
 
     // Constructor
-    public Character(String name, int maxHealth, int maxMana, int baseDamage, int[] location) {
+    public Actor(String name, int maxHealth, int maxMana, int baseDamage, int[] location) {
         this.name = name;
         this.health = maxHealth;
         this.maxHealth = maxHealth;
@@ -27,7 +27,7 @@ public class Character {
 
     // General Methods
     public void move(Map map) {
-        location = movementComponent.moveCharacter(location[0], location[1], map);
+        location = movementComponent.moveActor(location[0], location[1], map);
     }
 
     public void loseHealth(int damage) {
@@ -41,9 +41,9 @@ public class Character {
         else { health = maxHealth; }
     }
 
-    public void attack(Character targetCharacter) {
-        System.out.println(name + " attacks " + targetCharacter.getName() + ", dealing " + baseDamage + " damage!");
-        targetCharacter.loseHealth(baseDamage);
+    public void attack(Actor targetActor) {
+        System.out.println(name + " attacks " + targetActor.getName() + ", dealing " + baseDamage + " damage!");
+        targetActor.loseHealth(baseDamage);
     }
 
     // Gets
