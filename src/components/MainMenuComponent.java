@@ -50,8 +50,7 @@ public class MainMenuComponent {
                 enemies.add(new Goblin());
                 enemies.add(new Rat());
                 BattleInstance battleInstance = new BattleInstance(player, enemies);
-                battleInstance.battle();
-                return false;
+                return ( !battleInstance.battle() );
 
             case "4":
                 ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );

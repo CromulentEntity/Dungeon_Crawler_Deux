@@ -6,6 +6,7 @@ import src.components.MovementComponent;
 public class Actor {
     private String name;
     private int health;
+    private int armor;
     private int maxHealth;
     private int mana;
     private int maxMana;
@@ -14,9 +15,10 @@ public class Actor {
     private MovementComponent movementComponent;
 
     // Constructor
-    public Actor(String name, int maxHealth, int maxMana, int baseDamage, int[] location) {
+    public Actor(String name, int maxHealth, int armor, int maxMana, int baseDamage, int[] location) {
         this.name = name;
         this.health = maxHealth;
+        this.armor = armor;
         this.maxHealth = maxHealth;
         this.mana = maxMana;
         this.maxMana = maxMana;
@@ -42,8 +44,10 @@ public class Actor {
     }
 
     public void attack(Actor targetActor) {
-        System.out.println(name + " attacks " + targetActor.getName() + ", dealing " + baseDamage + " damage!");
-        targetActor.loseHealth(baseDamage);
+        int finalDamageValue = baseDamage - targetActor.getArmor();
+        if (finalDamageValue <= 0) { finalDamageValue = 1; }
+        System.out.println(name + " attacks " + targetActor.getName() + ", dealing " + finalDamageValue + " damage!");
+        targetActor.loseHealth(finalDamageValue);
     }
 
     // Gets
@@ -53,8 +57,17 @@ public class Actor {
     public int getHealth() {
         return health;
     }
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+    public int getArmor() {
+        return armor;
+    }
     public int getMana() {
         return mana;
+    }
+    public int getMaxMana() {
+        return maxMana;
     }
     public int[] getLocation() {
         return location;
@@ -78,6 +91,7 @@ public class Actor {
         String output = "Name: " + name +
             "\nHealth: " + health + "/" + maxHealth +
             "\nMana: " + mana + "/" + maxMana +
+            "\nArmor: " + armor +
             "\nDamage: " + baseDamage +
             "\nCoordinates - X: " + location[0] + " Y: " + location[1];
 

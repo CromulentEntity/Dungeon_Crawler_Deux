@@ -6,26 +6,35 @@ import java.util.Scanner;
 
 import src.ConsoleHelper;
 import src.actors.Actor;
+import src.actors.Player;
 
 public class BattleInstance {
-    Actor player;
+    Player player;
     ArrayList<Actor> enemies;
     int turn;
 
     // Constructor
-    public BattleInstance(Actor player, ArrayList<Actor> enemies) {
+    public BattleInstance(Player player, ArrayList<Actor> enemies) {
         this.player = player;
         this.enemies = enemies;
         this.turn = 0;
     }
 
     // General Methods
+    // Returns true if you win, false if you lose
     public boolean battle() {
         while(player.getHealth() > 0 && !enemies.isEmpty())  {
             turn();
         }
 
-        return (player.getHealth() > 0);
+        if (player.getHealth() > 0) {
+            System.out.println("You emerge victorious!\n");
+            return true;
+        } else {
+            System.out.println("You have been defeated....");
+            return false;
+        }
+
     }
 
     public void turn() {
@@ -35,7 +44,7 @@ public class BattleInstance {
         if (turn == 0) {
             // Player does things
             System.out.println("It is your turn.\n");
-            String[] choiceList = {"Attack", "Examine Enemies"};
+            String[] choiceList = {"Attack", "Examine Enemies", "Equip New Weapon"};
             ConsoleHelper.printChoices(choiceList);
             
             String rawInput = playerInput.nextLine();
@@ -56,6 +65,12 @@ public class BattleInstance {
                     ConsoleHelper.clear();
                     System.out.println(targetActor.toString());
                     ConsoleHelper.enterToContinue();
+                    break;
+
+                case "3":
+                    ConsoleHelper.clear();
+                    player.removeWeapon();
+                    player.equipWeapon();
                     break;
                 
                 default:
