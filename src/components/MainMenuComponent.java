@@ -19,30 +19,24 @@ public class MainMenuComponent {
 
     // General Methods
     public static boolean actionSelect(Map map, Player player) {
-        @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
-        Scanner playerInput = new Scanner(System.in);
-        String rawPlayerInput;
 
-        // Present possible actions to the player
-        String[] choiceList = {"View Bag Contents", "Move", "Fight", "Display Player Information", "Display Map", "Equip Weapon", "Unequip Weapon", "Exit"};
-        ConsoleHelper.printChoices(choiceList);
+        // Find out what the player would like to do
+        String query = "";
+        String[] possibleAnswers = {"View Bag Contents", "Move", "Fight", "Display Player Information", "Display Map", "Equip Weapon", "Unequip Weapon", "Exit"};
+        String playerInput = ConsoleHelper.queryPlayer(query, possibleAnswers);
+        
+        ConsoleHelper.clear();
 
-        // Let them pick what they would like to do from the list
-        rawPlayerInput = playerInput.nextLine();
-
-        // Handle their chosen action appropriately.
-        switch (rawPlayerInput) {
+        switch (playerInput) {
             case "1":
                 ConsoleHelper.displayInfoScreen( new String[]{player.getBag().toString()} );
                 return false;
 
             case "2":
-                ConsoleHelper.clear();
                 player.move(map);
                 return false;
 
             case "3":
-                ConsoleHelper.clear();
                 ArrayList<Actor> enemies = new ArrayList<>();
                 enemies.add(new Goblin());
                 enemies.add(new Rat());
@@ -59,17 +53,14 @@ public class MainMenuComponent {
                 return false;
 
             case "6":
-                ConsoleHelper.clear();
                 player.equipWeapon();
                 return false;
 
             case "7":
-                ConsoleHelper.clear();
                 player.removeWeapon();
                 return false;
 
             case "8":
-                ConsoleHelper.clear();
                 System.out.println("Exiting the program, Nya!");
                 return true;
 

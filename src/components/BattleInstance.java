@@ -31,7 +31,7 @@ public class BattleInstance {
     // Returns true if you win, false if you lose
     public boolean battle() {
         while(player.getHealth() > 0 && !enemies.isEmpty())  {
-            turn();
+            checkTurn();
         }
 
         if (player.getHealth() > 0) {
@@ -39,6 +39,7 @@ public class BattleInstance {
             player.gainExperience(expPrizePool);
             ConsoleHelper.enterToContinue();
             return true;
+
         } else {
             System.out.println("You have been defeated....");
             return false;
@@ -46,48 +47,44 @@ public class BattleInstance {
 
     }
 
-    public void turn() {
-        @SuppressWarnings("resource") // Can't close playerInput because it will kill System.in program-wide
-        Scanner playerInput = new Scanner(System.in);
-        
-        if (turn == 0) {
-            // Player does things
-            System.out.println("It is your turn.\n");
-            String[] choiceList = {"Attack", "Examine Enemies", "Equip New Weapon"};
-            ConsoleHelper.printChoices(choiceList);
+    private void playerSelectAction() {
+        // Find out what the player would like to do
+        String query = "It is your turn.\n";
+        String[] possibleAnswers = {"Attack", "Examine Enemies", "Equip New Weapon"};
+        String playerInput = ConsoleHelper.queryPlayer(query, possibleAnswers);
+
+        ConsoleHelper.clear();
+
+        switch (playerInput) {
+            case "1":
+                Actor target = chooseTarget();
+                ConsoleHelper.clear();
+                player.attack(target);
+                checkEnemyHealth(target);
+                advanceTurn();
+                break;
+
+            case "2":
+                Actor targetActor = chooseTarget();
+                ConsoleHelper.clear();
+                System.out.println(targetActor.toString());
+                ConsoleHelper.enterToContinue();
+                break;
+
+            case "3":
+                player.removeWeapon();
+                player.equipWeapon();
+                break;
             
-            String rawInput = playerInput.nextLine();
+            default:
+                System.out.println("That is not a valid input! Hiss!\n");
+                break;
+        }
+    }
 
-            switch (rawInput) {
-                case "1":
-                    ConsoleHelper.clear();
-                    Actor target = chooseTarget();
-                    ConsoleHelper.clear();
-                    player.attack(target);
-                    checkEnemyHealth(target);
-                    advanceTurn();
-                    break;
-
-                case "2":
-                    ConsoleHelper.clear();
-                    Actor targetActor = chooseTarget();
-                    ConsoleHelper.clear();
-                    System.out.println(targetActor.toString());
-                    ConsoleHelper.enterToContinue();
-                    break;
-
-                case "3":
-                    ConsoleHelper.clear();
-                    player.removeWeapon();
-                    player.equipWeapon();
-                    break;
-                
-                default:
-                    ConsoleHelper.clear();
-                    System.out.println("That is not a valid input! Hiss!\n");
-                    break;
-            }
-
+    public void checkTurn() {
+        if (turn == 0) {
+            playerSelectAction();
         } else {
             // Enemies do things
             System.out.println("\nIt is the " + enemies.get(turn-1).getName() + "\'s turn.");

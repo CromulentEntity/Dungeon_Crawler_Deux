@@ -43,4 +43,26 @@ public class ConsoleHelper {
         clear();
         System.out.println("That is not a valid input! Hiss!\n");
     }
+
+    public static String queryPlayer(String query, String[] possibleAnswers) {
+        
+        // Print query if not empty, then print possible choices
+        if ( (!query.equals("")) ) { System.out.println(query); }
+        printChoices(possibleAnswers);
+        
+        // Allow player to input their choice, convert to number if needed
+        String playerAnswer = playerInput.nextLine();
+        return getIndexFromString(playerAnswer, possibleAnswers);
+    }
+
+    private static String getIndexFromString(String playerAnswer, String[] listOfOptions) {
+        for (int i = 0; i < listOfOptions.length; i++) {
+            
+            if (playerAnswer.equals(listOfOptions[i])) {
+                return "" + i;
+            }
+        }
+
+        return playerAnswer;
+    }
 }

@@ -2,8 +2,6 @@
 
 package src.components;
 
-import java.util.Scanner;
-
 import src.ConsoleHelper;
 import src.Map;
 import src.tiles.Tile;
@@ -12,23 +10,20 @@ public class MovementComponent {
 
     // General Methods
     public int[] moveActor(int currentXCoordinate, int currentYCoordinate, Map map) {
-        @SuppressWarnings("resource") //Can't close playerInput because it will kill System.in program-wide
-        Scanner playerInput = new Scanner(System.in);
         int newXCoordinate;
         int newYCoordinate;
 
         ConsoleHelper.clear();
-
-        System.out.print(map.toString());
-        System.out.println("\nWhat direction would you like to move?");
-        String[] choiceList = {"North", "South", "East", "West"};
-        ConsoleHelper.printChoices(choiceList);
-
-        String direction = playerInput.nextLine();
+        System.out.println(map.toString());
+        
+        // Find out what the player would like to do
+        String query = "What direction would you like to move?";
+        String[] possibleAnswers = {"North", "South", "East", "West"};
+        String playerInput = ConsoleHelper.queryPlayer(query, possibleAnswers);
 
         ConsoleHelper.clear();
 
-        switch(direction) {
+        switch(playerInput) {
             case "1":
                 newXCoordinate = currentXCoordinate;
                 newYCoordinate = currentYCoordinate - 1;
