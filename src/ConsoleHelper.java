@@ -65,4 +65,25 @@ public class ConsoleHelper {
 
         return playerAnswer;
     }
+
+    public static String getStringInput() {
+        return playerInput.nextLine();
+    }
+
+    public static int getPositiveIntFromPlayer() {
+        while (!playerInput.hasNextInt()) { 
+            System.out.print("That wasn't a number, try again: ");
+            playerInput.next();
+        }
+
+        int input = playerInput.nextInt();
+
+        if (input > 0) {
+            playerInput.nextLine(); // Consume newLine character following the int
+            return input;
+        } else {
+            System.out.print("That number wasn't positive, try again: ");
+            return getPositiveIntFromPlayer();
+        }
+    }
 }
