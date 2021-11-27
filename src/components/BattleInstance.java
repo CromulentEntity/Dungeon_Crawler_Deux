@@ -50,7 +50,7 @@ public class BattleInstance {
     private void playerSelectAction() {
         // Find out what the player would like to do
         String query = "It is your turn.\n";
-        String[] possibleAnswers = {"Attack", "Examine Enemies", "Equip New Weapon"};
+        String[] possibleAnswers = {"Attack", "View Player Information", "Examine Enemies", "Equip New Weapon"};
         String playerInput = ConsoleHelper.queryPlayer(query, possibleAnswers);
 
         ConsoleHelper.clear();
@@ -65,13 +65,17 @@ public class BattleInstance {
                 break;
 
             case "2":
+                ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
+                break;
+
+            case "3":
                 Actor targetActor = chooseTarget();
                 ConsoleHelper.clear();
                 System.out.println(targetActor.toString());
                 ConsoleHelper.enterToContinue();
                 break;
 
-            case "3":
+            case "4":
                 player.removeWeapon();
                 player.equipWeapon();
                 break;

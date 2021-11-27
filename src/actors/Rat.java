@@ -19,6 +19,7 @@ public class Rat extends Actor{
     }
 
     // General Methods
+    @Override
     public void attack(Actor targetActor) {
         int randomNumber = ThreadLocalRandom.current().nextInt(1, 101); // Random number from 1 - 100
         if (randomNumber == 1) {
