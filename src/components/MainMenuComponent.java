@@ -3,7 +3,6 @@
 package src.components;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import src.ConsoleHelper;
 import src.Map;
@@ -29,44 +28,76 @@ public class MainMenuComponent {
 
         switch (playerInput) {
             case "1":
-                ConsoleHelper.displayInfoScreen( new String[]{player.getBag().toString()} );
+                viewBagContents(player);
                 return false;
 
             case "2":
-                player.move(map);
+                move(map, player);
                 return false;
 
             case "3":
-                ArrayList<Actor> enemies = new ArrayList<>();
-                enemies.add(new Goblin());
-                enemies.add(new Rat());
-                BattleInstance battleInstance = new BattleInstance(player, enemies);
-                return ( !battleInstance.battle() );
+                return fight(player);
 
             case "4":
-                ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
+                displayPlayerInformation(player);
                 return false;
 
             case "5":
-                ConsoleHelper.displayInfoScreen( new String[] {map.toString(), 
-                    ("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1])});
+                displayMap(map, player);
                 return false;
 
             case "6":
-                player.equipWeapon();
+                equipWeapon(player);
                 return false;
 
             case "7":
-                player.removeWeapon();
+                removeWeapon(player);
                 return false;
 
             case "8":
-                System.out.println("Exiting the program, Nya!");
+                exitProgram();
                 return true;
 
             default:
                 ConsoleHelper.invalidInputMessage();
                 return false;
         }
+    }
+
+    private static void viewBagContents(Player player) {
+        ConsoleHelper.displayInfoScreen( new String[]{player.getBag().toString()} );
+    }
+
+    private static void move(Map map, Player player) {
+        player.move(map);
+    }
+
+    private static boolean fight(Player player) {
+        ArrayList<Actor> enemies = new ArrayList<>();
+        enemies.add(new Goblin());
+        enemies.add(new Rat());
+        BattleInstance battleInstance = new BattleInstance(player, enemies);
+        return ( !battleInstance.battle() );
+    }
+
+    private static void displayPlayerInformation(Player player) {
+        ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
+    }
+
+    private static void displayMap(Map map, Player player) {
+        ConsoleHelper.displayInfoScreen( new String[] {map.toString(), 
+            ("Location - X: " + player.getLocation()[0] + " Y: " + player.getLocation()[1])});
+    }
+
+    private static void equipWeapon(Player player) {
+        player.equipWeapon();
+    }
+
+    private static void removeWeapon(Player player) {
+        player.removeWeapon();
+    }
+
+    private static void exitProgram() {
+        System.out.println("Exiting the program, Nya!");
     }
 }

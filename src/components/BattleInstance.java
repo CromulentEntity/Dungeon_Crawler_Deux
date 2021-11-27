@@ -57,33 +57,49 @@ public class BattleInstance {
 
         switch (playerInput) {
             case "1":
-                Actor target = chooseTarget();
-                ConsoleHelper.clear();
-                player.attack(target);
-                checkEnemyHealth(target);
-                advanceTurn();
+                attack();
                 break;
 
             case "2":
-                ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
+                viewPlayerInformation();
                 break;
 
             case "3":
-                Actor targetActor = chooseTarget();
-                ConsoleHelper.clear();
-                System.out.println(targetActor.toString());
-                ConsoleHelper.enterToContinue();
+                examineEnemies();
                 break;
 
             case "4":
-                player.removeWeapon();
-                player.equipWeapon();
+                equipNewWeapon();
                 break;
             
             default:
-                System.out.println("That is not a valid input! Hiss!\n");
+                ConsoleHelper.invalidInputMessage();
                 break;
         }
+    }
+
+    private void attack() {
+        Actor target = chooseTarget();
+        ConsoleHelper.clear();
+        player.attack(target);
+        checkEnemyHealth(target);
+        advanceTurn();
+    }
+
+    private void viewPlayerInformation() {
+        ConsoleHelper.displayInfoScreen( new String[]{player.toString()} );
+    }
+
+    private void examineEnemies() {
+        Actor targetActor = chooseTarget();
+        ConsoleHelper.clear();
+        System.out.println(targetActor.toString());
+        ConsoleHelper.enterToContinue();
+    }
+
+    private void equipNewWeapon() {
+        player.removeWeapon();
+        player.equipWeapon();
     }
 
     public void checkTurn() {

@@ -25,29 +25,45 @@ public class MovementComponent {
 
         switch(playerInput) {
             case "1":
-                newXCoordinate = currentXCoordinate;
-                newYCoordinate = currentYCoordinate - 1;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "North");
+                return moveNorth(currentXCoordinate, currentYCoordinate, map);
 
             case "2":
-                newXCoordinate = currentXCoordinate;
-                newYCoordinate = currentYCoordinate + 1;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "South");
+                return moveSouth(currentXCoordinate, currentYCoordinate, map);
 
             case "3":
-                newXCoordinate = currentXCoordinate + 1;
-                newYCoordinate = currentYCoordinate;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "East");
+                return moveEast(currentXCoordinate, currentYCoordinate, map);
                 
             case "4":
-                newXCoordinate = currentXCoordinate - 1;
-                newYCoordinate = currentXCoordinate;
-                return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "West");
+                return moveWest(currentXCoordinate, currentYCoordinate, map);
 
             default:
-                System.out.println("That is not a valid input! Hiss!\n"); 
+                ConsoleHelper.invalidInputMessage();
                 return moveActor(currentXCoordinate, currentYCoordinate, map);
         }
+    }
+
+    private int[] moveNorth(int currentXCoordinate, int currentYCoordinate, Map map) {
+        int newXCoordinate = currentXCoordinate;
+        int newYCoordinate = currentYCoordinate - 1;
+        return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "North");
+    }
+
+    private int[] moveSouth(int currentXCoordinate, int currentYCoordinate, Map map) {
+        int newXCoordinate = currentXCoordinate;
+        int newYCoordinate = currentYCoordinate + 1;
+        return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "South");
+    }
+
+    private int[] moveEast(int currentXCoordinate, int currentYCoordinate, Map map) {
+        int newXCoordinate = currentXCoordinate + 1;
+        int newYCoordinate = currentYCoordinate;
+        return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "East");
+    }
+
+    private int[] moveWest(int currentXCoordinate, int currentYCoordinate, Map map) {
+        int newXCoordinate = currentXCoordinate - 1;
+        int newYCoordinate = currentXCoordinate;
+        return checkCollisions(newXCoordinate, currentXCoordinate, newYCoordinate, currentYCoordinate, map, "West");
     }
 
     private int[] checkCollisions(int newXCoordinate, int currentXCoordinate, int newYCoordinate, int currentYCoordinate, Map map, String direction) {
